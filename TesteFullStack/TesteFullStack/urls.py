@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.home, name='home' ),
     path('novopedido/', views.novo_pedido),
     path('editarpedido/<int:id>/', views.editar_pedido),
+    path('apagarpedido/<int:id>/', views.apagar_pedido),
 ]

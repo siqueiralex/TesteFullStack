@@ -24,10 +24,15 @@ def editar_pedido(request, id):
     items_pedido = ItemPedido.objects.filter(pedido=pedido)
     if request.method == 'POST':
         form = ItemPedidoForm(request.POST)
-        item = form.save(commit=False)
+        item = form.save(commit=False) 
         item.pedido = pedido
         item.save()
         return redirect('/editarpedido/'+str(pedido.id)) 
     else:
         form = ItemPedidoForm()
     return render(request, 'editar_pedido.html', {'form':form, 'pedido':pedido, 'items':items_pedido})
+
+def apagar_pedido(request, id):
+    pedido = get_object_or_404(Pedido, pk=id)
+    pedido.delete()
+    return redirect('/')
