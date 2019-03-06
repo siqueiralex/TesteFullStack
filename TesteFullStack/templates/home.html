@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Pedidos
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+            <div class="panel panel-primary" >
+                <div class="panel-heading">
+                Pedidos
+                <div class="pull-right action-buttons">
+                    <div class="btn-group pull-right">
+                        
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="panel-body">
+                        <a href="/novopedido">Adicionar</a> 
+                    <ul class="list-group">
+                        {% for pedido in pedidos %}
+                        <li class="list-group-item">
+                            <div class="checkbox">
+                                    {{pedido.cliente.nome}}#{{pedido.id}}
+                                    <a href="/editarpedido/{{pedido.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="/apagarpedido/{{pedido.id}}" class="trash"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+    </div>
+{% endblock %}
