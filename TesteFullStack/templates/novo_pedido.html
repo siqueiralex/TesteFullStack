@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Novo Pedido
+{% endblock %}
+
+{% block content %}
+<a href="/">Voltar</a>
+  <div class="container">
+      <div class="row">
+              <h2>Novo Pedido</h2>
+              <div class="panel panel-primary" >
+                  <form method="post">
+                      {% csrf_token %}
+                      {{ form.as_p }}
+                      <button type="submit" class="btn btn-success">Criar</button>
+                  </form>
+              </div>
+      </div>
+  </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

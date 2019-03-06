@@ -1,8 +1,33 @@
-from django.shortcuts import render
-from .models import Pedido
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Pedido, Cliente, Produto, ItemPedido
+from .forms import PedidoForm, ItemPedidoForm
 
 # Create your views here.
 
 def home(request):
     pedidos = Pedido.objects.all()
     return render(request, 'home.html', {'pedidos': pedidos})
+
+def novo_pedido(request):
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            pedido = form.save(commit=False)
+            pedido.save()
+            return redirect('/editarpedido/{}'.format(pedido.id)) 
+    else:
+        form = PedidoForm()
+    return render(request, 'novo_pedido.html', {'form': form})
+
+def editar_pedido(request, id):
+    pedido = get_object_or_404(Pedido, pk=id)
+    items_pedido = ItemPedido.objects.filter(pedido=pedido)
+    if request.method == 'POST':
+        form = ItemPedidoForm(request.POST)
+        item = form.save(commit=False)
+        item.pedido = pedido
+        item.save()
+        return redirect('/editarpedido/'+str(pedido.id)) 
+    else:
+        form = ItemPedidoForm()
+    return render(request, 'editar_pedido.html', {'form':form, 'pedido':pedido, 'items':items_pedido})

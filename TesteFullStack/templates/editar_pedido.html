@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Edita
+{% endblock %}
+
+{% block content %}
+
+
+<a href="/">Voltar</a>
+<div class="container">
+        <div class="row">
+                <h2>Pedido de {{pedido.cliente.nome}} - #{{pedido.id}}</h2>
+
+                <div class="panel panel-primary" >
+                        <table>
+                                <tr>
+                                        <td width="200"> <b>Produto</b> </td>
+                                        <td width="200"> <b>Quantidade</b> </td>
+                                        <td width="100" > <b>Preço</b> </td>
+                                </tr>
+                            {% for item in items %}
+                                <tr> 
+                                    <td> {{item.produto.nome}} </td>
+                                    <td> {{item.quantidade}} </td>
+                                    <td> R$ {{item.preco}} </td>
+                                    <td><a href="/apagaritempedido/{{item.id}}">excluir</a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.produto }}
+                        {{ form.quantidade }}
+                        {{ form.preco }}
+                        <button type="submit" class="btn btn-success" id= "submit_produto">Adicionar</button>
+                    </form>
+                    <div class="alert" id="div_rentabilidade">
+        
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endblock %}
