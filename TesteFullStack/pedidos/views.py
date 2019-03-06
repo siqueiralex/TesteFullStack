@@ -36,3 +36,9 @@ def apagar_pedido(request, id):
     pedido = get_object_or_404(Pedido, pk=id)
     pedido.delete()
     return redirect('/')
+
+def apagar_item_pedido(request, id):
+    item_pedido = get_object_or_404(ItemPedido, pk=id)
+    pedido_id = item_pedido.pedido.id
+    item_pedido.delete()
+    return redirect('/editarpedido/{}'.format(pedido_id))
