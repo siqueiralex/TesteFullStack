@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Pedido, Cliente, Produto, ItemPedido
 from .forms import PedidoForm, ItemPedidoForm
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -42,3 +43,8 @@ def apagar_item_pedido(request, id):
     pedido_id = item_pedido.pedido.id
     item_pedido.delete()
     return redirect('/editarpedido/{}'.format(pedido_id))
+
+def produto(request):
+    if request.is_ajax():
+        produto = get_object_or_404(Produto, pk=request.POST['id'])
+        return JsonResponse({'nome':produto.nome, 'preco': produto.preco, 'multiplo':produto.multiplo})

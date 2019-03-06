@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+{% block header %}
+    {% load static %}
+    <script src= "{% static 'js/pedido.js' %}"></script>
+
+    <!-- Pra ser acessível no ajax -->
+    <script> window.CSRF_TOKEN = "{{ csrf_token }}"; </script> 
+{% endblock %}
+
 
 {% block title %}
   Edita
@@ -43,4 +51,13 @@
                 </div>
         </div>
     </div>
+
+    <script> 
+        const form_handler = new PedidoForm;
+        console.log("teste");
+        $("#id_produto").attr('onchange', 'form_handler.mudou_produto();');
+        $("#id_quantidade").attr('onchange', 'form_handler.mudou_quantidade();');
+        $("#id_preco").attr('oninput', 'form_handler.mudou_preco();');
+    </script>
+
 {% endblock %}
