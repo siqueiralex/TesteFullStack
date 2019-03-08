@@ -9,6 +9,7 @@ class PedidoForm{
 
     mudou_produto(){
        this.atualiza_campos()
+       this.mudou_preco()
     }
 
     mudou_preco(){
