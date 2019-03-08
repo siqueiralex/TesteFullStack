@@ -53,8 +53,8 @@
     </div>
 
     <script> 
+        // instancia classe que lida com o form e adiciona triggers nos campos do formulário.
         const form_handler = new PedidoForm;
-        console.log("teste");
         $("#id_produto").attr('onchange', 'form_handler.mudou_produto();');
         $("#id_quantidade").attr('onchange', 'form_handler.mudou_quantidade();');
         $("#id_preco").attr('oninput', 'form_handler.mudou_preco();');
