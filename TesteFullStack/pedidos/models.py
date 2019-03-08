@@ -18,6 +18,7 @@ class Produto(models.Model):
 
 class Pedido(models.Model):
     cliente = models.ForeignKey(Cliente, related_name='cliente', on_delete=models.CASCADE)
+    # relação many-to-many feita através do model ItemPedido pelo parametro 'through'
     produtos = models.ManyToManyField(Produto, through='ItemPedido', blank=True, related_name='produtos')
      
     def __str__(self):
